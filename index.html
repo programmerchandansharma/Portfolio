@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chandan Sharma - Portfolio</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" style="border-radius: 50%;" href="imgchandan.png">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #fff8f0;
+            color: #2c2c2c;
+        }
+
+        /* HEADER */
+        .navbar {
+            background: #1e3a8a;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #ffb300, #d61c73, #1e3a8a);
+            color: #fff;
+            padding: 80px 0;
+        }
+
+        .hero h2 span {
+            color: #ffeb3b;
+        }
+
+        .hero-img {
+            width: 260px;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #fff;
+        }
+
+        /* BUTTON */
+        .btn-custom {
+            background: #4e342e;
+            color: #fff;
+            border-radius: 8px;
+            padding: 10px 26px;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 70px 0;
+        }
+        .about-text {
+            margin: 2%;
+        } 
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        /* SKILLS */
+        .skills {
+            background: #fff3dd;
+        }
+
+        .skill-box {
+            background: #1e3a8a;
+            color: #fff;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* PROJECTS */
+        .project-card {
+            background: #d61c73;
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            height: 100%;
+        }
+
+        /* CONTACT */
+        .contact {
+            background: #ffe5c4;
+            text-align: center;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1e3a8a;
+            color: #fff;
+            padding: 18px 0;
+            text-align: center;
+        }
+
+        /* SMALL DEVICES */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+                text-align: center;
+            }
+
+            .hero-img {
+                width: 210px;
+                height: 210px;
+                margin-top: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Chandan Sharma</a>
+
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav gap-lg-3">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- HERO -->
+    <section id="home" class="hero mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                <h2 class="display-5 fw-bold">
+                    Hello, I'm <span>Chandan Sharma</span>
+                </h2>
+                
+                <p class="mt-3">
+                    Full Stack Developer • Web Developer • Telephony Dialer Expert
+                </p>
+                
+                <div class="mt-4">
+                    <a href="#contact" class="btn btn-outline-custom">Hire Me</a>
+                    <a href="Chandan_Sharma_Resume.pdf" class="btn btn-outline-custom" download>
+                        Download Resume
+                    </a>
+                </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="imgchandan.png" class="hero-img" alt="Profile" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+<section id="about" class="about">
+    <h2 class="section-title">About Me</h2>
+
+    <p class="about-text">
+        I am <strong>Chandan Sharma</strong>, a Full Stack Developer with strong experience in building
+        Telephony CRM, VoIP Billing Software, Asterisk Dialplans, Admin Panels, Automation Tools,
+        and Custom Web Applications. I specialize in PHP, MySQL, React.js, Node.js, Asterisk, Linux,
+        and API Integrations, with a strong focus on clean coding, performance, and scalable solutions.
+    </p>
+
+    <p class="about-text">
+        I am a quick learner and always open to adopting new technologies. With every new project
+        and challenge, I take it as an opportunity to grow, learn, and deliver reliable solutions.
+        I have successfully handled complex requirements by understanding business needs and
+        converting them into efficient technical implementations.
+    </p>
+
+    <p class="about-text">
+        Over time, my role has evolved from individual contributor to leading development efforts.
+        I now guide and support my team, manage tasks, review code quality, and ensure projects
+        are delivered on time with high standards. I believe in teamwork, continuous improvement,
+        and building systems that add real business value.
+    </p>
+</section>
+
+
+<!-- SKILLS -->
+<section id="skills" class="skills py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title text-center">Skills</h2>
+        <div class="row g-4">
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="skill-box">PHP / MySQL</div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="skill-box">JavaScript</div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="skill-box">Node.js</div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="skill-box">React.js</div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="skill-box">Asterisk</div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="skill-box">Cloud APIs</div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="skill-box">Linux Server</div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="skill-box">Telephony Dialer</div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- PROJECTS -->
+<!-- PROJECTS -->
+<section id="projects" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center">Professional Projects</h2>
+
+        <div class="row g-4">
+
+            <!-- UPDATED & PROFESSIONAL PROJECT CONTENT -->
+            
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Jitsi Meet – Video Conferencing Platform (M)</h5>
+                    <p><b>Tech:</b> JavaScript, Bootstrap, REST APIs</p>
+                    <p>
+                        Deployed and configured Jitsi Meet on an Ubuntu server from the official GitHub repository.
+                        The platform is fully production-ready, secured, and whitelisted for seamless integration
+                        with the Next2Call ecosystem, enabling reliable internal and client video meetings.
+                    </p>
+                    <p><a href="https://meet.next2call.com/" target="_blank">Visit Project</a></p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Next2Call – Corporate Website & Admin Panel</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Bootstrap, PHPMailer, APIs</p>
+                    <p>
+                        Official corporate website of Next2Call, where I played a key role in development and
+                        ongoing maintenance. Includes an admin panel to monitor website visitors, job applications,
+                        user enquiries, and email communications, ensuring smooth business operations.
+                    </p>
+                    <p><a href="https://next2call.com" target="_blank">Visit Project</a></p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>WebRTC Click-to-Call Web Phone</h5>
+                    <p><b>Tech:</b> Node.js, JavaScript, Bootstrap, WebRTC APIs</p>
+                    <p>
+                        Developed and integrated a WebRTC-based web phone focused on click-to-call functionality.
+                        This solution enables instant browser-based calling without hardware dependencies and is
+                        used as part of larger telephony and CRM workflows.
+                    </p>
+                    <p><a href="https://ststephenschurch.in/admin/Phone/" target="_blank">Visit Project</a></p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Flight Booking CRM (M)</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Bootstrap, Cloud APIs</p>
+                    <p>Flight booking CRM with ticket confirmation emails, admin/agent notifications, and email
+                        authentication.</p>
+                    <p><a href="https://crm.orgmytrip.com" target="_blank">Visit Project</a></p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Novillo CRM</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Asterisk</p>
+                    <p>Advanced call tracking CRM with bid-priority lead distribution and analytics.</p>
+                    <p><a href="https://nov-i.com" target="_blank">Visit Project</a></p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Data Entry Automation CRM</h5>
+                    <p><b>Tech:</b> PHP, JavaScript</p>
+                    <p>Multi-type data entry automation system with integrated email workflows.</p>
+                    <p><a href="https://next2call.com/dataentry/" target="_blank">Visit Project</a></p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Next2Call – Cloud Communication Platform (M)</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Cloud APIs</p>
+                    <p>VoIP communication platform managing telecom services and infrastructure.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Ticket CRM (M)</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Cloud APIs</p>
+                    <p>Client ticket management system handling new, pending, and closed tickets.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Cloud Telephony CRM (M)</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Asterisk</p>
+                    <p>Live call routing, agent monitoring, and call-center admin controls.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Dialer Cloud Telephony (M)</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Asterisk</p>
+                    <p>Dialer-based call routing with live tracking and reporting.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Chat Panel (M)</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Cloud APIs</p>
+                    <p>Bulk and global messaging panel for multi-user communication.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>ShareCharge – EV Charging Platform</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Cloud APIs</p>
+                    <p>B2C EV charging system with wallet, admin, distributor, and user roles.</p>
+                    <p><a href="https://sharecharge.in" target="_blank">Visit Project</a></p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>Billing Switch & Ringfy Telephony (Backend) (M)</h5>
+                    <p><b>Tech:</b> Node.js, PHP, Asterisk</p>
+                    <p>Backend systems for billing, DID management, call routing, and reporting.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="project-card">
+                    <h5>PMPWANI WiFi Platform (M)</h5>
+                    <p><b>Tech:</b> PHP, JavaScript, Cloud APIs</p>
+                    <p>B2C WiFi hotspot management platform with admin and distributor roles.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="project-card">
+                <h5>Additional Professional Experience</h5>
+                <p>✔ 500+ custom Call Routing APIs developed as per client requirements</p>
+                <p>✔ Cloud Telephony Dialer and Call Center Solutions</p>
+                <p>✔ OBD CRM with IVR Blast (Domestic & Global campaigns)</p>
+                <p>✔ Blog, Shopping, and Church websites using WordPress technology</p>
+                <p>✔ Strong experience with hosting environments, including cPanel, email configuration, domain & subdomain
+                    management</p>
+                </div>
+            </div>  
+                    <!-- END -->
+
+        </div>
+    </div>
+</section>
+
+    <!-- CONTACT -->
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <p>If you want to work with me or have any project idea, feel free to contact.</p>
+    
+        <div class="contact-info">
+            <p><strong>Email:</strong>sharmachandan7706@gmail.com</p>
+            <p><strong>Phone:</strong> +91 7706912044</p>
+            <p> <a
+                    href="https://www.linkedin.com/in/chandan-sharma-337968253?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BXSMhB2IbQAGy0S6DNtRPbg%3D%3D"><strong>linkedin:</strong>
+                    https://www.linkedin.com/in/chandan-sharma </a></p>
+            <p><a href="https://github.com/programmerchandansharma"><strong>GitHub:</strong> github.com/programmerchandansharma</a></p>
+           
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Chandan Sharma. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
