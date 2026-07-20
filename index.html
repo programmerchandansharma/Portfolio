@@ -1,1100 +1,1506 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Chandan Sharma — Full Stack &amp; Telephony Systems Developer</title>
-<meta name="description" content="Chandan Sharma — Full Stack Developer specializing in Telephony CRM, VoIP Billing, Asterisk Dialplans and Cloud Communication Platforms." />
-<link rel="icon" type="image/x-icon" href="imgchandan.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chandan Sharma — Full Stack &amp; Telephony Systems Developer</title>
+  <meta name="description"
+    content="Chandan Sharma — Full Stack Developer specializing in Telephony CRM, VoIP Billing, Asterisk Dialplans and Cloud Communication Platforms." />
+  <link rel="icon" type="image/x-icon" href="imgchandan.png" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
 
-<style>
-  :root{
-    --ink:#f5f8fb;
-    --panel:#ffffff;
-    --panel-2:#eef2f8;
-    --line:rgba(16,31,51,0.10);
-    --signal:#0891b2;
-    --signal-dim:rgba(8,145,178,0.30);
-    --pulse:#ff7a45;
-    --paper:#101f33;
-    --mute:#5b6b82;
-    --body-copy:#33445c;
-
-    --font-display:'Space Grotesk', sans-serif;
-    --font-body:'Inter', sans-serif;
-    --font-mono:'JetBrains Mono', monospace;
-
-    --container: min(1180px, 92vw);
-  }
-
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0;
-    background:var(--ink);
-    color:var(--paper);
-    font-family:var(--font-body);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  img{ max-width:100%; display:block; }
-  a{ color:inherit; text-decoration:none; }
-
-  ::selection{ background:var(--signal); color:var(--ink); }
-
-  .wrap{ width:var(--container); margin:0 auto; }
-
-  h1,h2,h3{ font-family:var(--font-display); margin:0; letter-spacing:-0.01em; }
-
-  a:focus-visible, button:focus-visible{
-    outline:2px solid var(--signal);
-    outline-offset:3px;
-    border-radius:4px;
-  }
-
-  /* subtle grid texture on the whole page */
-  body::before{
-    content:"";
-    position:fixed; inset:0;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:64px 64px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
-    pointer-events:none;
-    z-index:0;
-  }
-
-  ::-webkit-scrollbar{ width:10px; }
-  ::-webkit-scrollbar-track{ background:var(--ink); }
-  ::-webkit-scrollbar-thumb{ background:#c7d2e0; border-radius:6px; }
-
-  /* ---------- eyebrow / line-label device ---------- */
-  .line-label{
-    font-family:var(--font-mono);
-    font-size:0.78rem;
-    letter-spacing:0.12em;
-    color:var(--signal);
-    display:inline-flex;
-    align-items:center;
-    gap:0.6em;
-    text-transform:uppercase;
-    margin-bottom:1.1rem;
-  }
-  .line-label::before{
-    content:"";
-    width:7px; height:7px;
-    border-radius:50%;
-    background:var(--signal);
-    box-shadow:0 0 0 3px rgba(8,145,178,0.15);
-  }
-
-  /* ---------- NAV ---------- */
-  header.nav{
-    position:fixed; top:0; left:0; right:0;
-    z-index:100;
-    background:rgba(245,248,251,0.78);
-    backdrop-filter:blur(14px) saturate(140%);
-    border-bottom:1px solid var(--line);
-    box-shadow:0 1px 0 rgba(16,31,51,0.03);
-  }
-  .nav-inner{
-    width:var(--container); margin:0 auto;
-    display:flex; align-items:center; justify-content:space-between;
-    height:72px;
-  }
-  .brand{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:1.05rem;
-    display:flex; align-items:center; gap:0.6rem;
-  }
-  .brand .dot{
-    width:9px;height:9px;border-radius:50%;
-    background:var(--signal);
-    box-shadow:0 0 12px var(--signal);
-  }
-  .brand small{
-    font-family:var(--font-mono);
-    color:var(--mute);
-    font-weight:400;
-    font-size:0.7rem;
-  }
-  nav.links{ display:flex; gap:2.1rem; align-items:center; }
-  nav.links a{
-    font-family:var(--font-mono);
-    font-size:0.82rem;
-    color:var(--mute);
-    letter-spacing:0.04em;
-    position:relative;
-    padding:4px 0;
-    transition:color .2s ease;
-  }
-  nav.links a:hover, nav.links a.active{ color:var(--paper); }
-  nav.links a::after{
-    content:""; position:absolute; left:0; bottom:0;
-    width:0; height:1px; background:var(--signal);
-    transition:width .25s ease;
-  }
-  nav.links a:hover::after{ width:100%; }
-
-  .burger{
-    display:none;
-    width:40px; height:40px;
-    border:1px solid var(--line);
-    border-radius:8px;
-    background:transparent;
-    position:relative;
-    cursor:pointer;
-  }
-  .burger span, .burger span::before, .burger span::after{
-    content:""; position:absolute; left:10px; right:10px; height:2px;
-    background:var(--paper); transition:transform .25s ease, opacity .2s ease;
-  }
-  .burger span{ top:19px; }
-  .burger span::before{ top:-7px; }
-  .burger span::after{ top:7px; }
-  .burger.open span{ background:transparent; }
-  .burger.open span::before{ transform:translateY(7px) rotate(45deg); }
-  .burger.open span::after{ transform:translateY(-7px) rotate(-45deg); }
-
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative;
-    min-height:100svh;
-    display:flex; align-items:center;
-    padding:120px 0 60px;
-    overflow:hidden;
-  }
-  #globe-canvas{
-    position:absolute;
-    top:0; right:0;
-    width:min(58vw, 720px);
-    height:100%;
-    z-index:0;
-    opacity:0.95;
-  }
-  .hero-inner{
-    position:relative; z-index:1;
-    width:var(--container); margin:0 auto;
-    display:grid;
-    grid-template-columns:1.1fr 0.9fr;
-    gap:2rem;
-    align-items:center;
-  }
-  .hero-copy .status-chip{
-    font-family:var(--font-mono);
-    font-size:0.76rem;
-    color:#7CFFB2;
-    background:rgba(60,220,140,0.08);
-    border:1px solid rgba(60,220,140,0.3);
-    padding:6px 12px;
-    border-radius:999px;
-    display:inline-flex; align-items:center; gap:8px;
-    margin-bottom:1.6rem;
-  }
-  .status-chip .ping{
-    width:8px;height:8px;border-radius:50%;
-    background:#3ee08a;
-    box-shadow:0 0 0 0 rgba(62,224,138,0.6);
-    animation:ping 1.8s infinite;
-  }
-  @keyframes ping{
-    0%{ box-shadow:0 0 0 0 rgba(62,224,138,0.55); }
-    70%{ box-shadow:0 0 0 8px rgba(62,224,138,0); }
-    100%{ box-shadow:0 0 0 0 rgba(62,224,138,0); }
-  }
-
-  .hero-copy h1{
-    font-size:clamp(2.4rem, 5.4vw, 4.1rem);
-    font-weight:700;
-    line-height:1.06;
-  }
-  .hero-copy h1 .accent{ color:var(--signal); }
-  .hero-copy .role{
-    font-family:var(--font-mono);
-    color:var(--mute);
-    font-size:clamp(0.9rem, 1.6vw, 1.05rem);
-    margin-top:1.1rem;
-    letter-spacing:0.02em;
-  }
-  .hero-copy .role .sep{ color:var(--signal); margin:0 0.5em; }
-
-  .hero-cta{
-    margin-top:2.3rem;
-    display:flex; gap:1rem; flex-wrap:wrap;
-  }
-  .btn{
-    font-family:var(--font-mono);
-    font-size:0.85rem;
-    padding:13px 24px;
-    border-radius:8px;
-    border:1px solid var(--line);
-    display:inline-flex; align-items:center; gap:0.6rem;
-    transition:transform .2s ease, border-color .2s ease, background .2s ease;
-    cursor:pointer;
-    white-space:nowrap;
-  }
-  .btn-solid{
-    background:var(--signal);
-    color:var(--ink);
-    border-color:var(--signal);
-    font-weight:600;
-  }
-  .btn-solid:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(8,145,178,0.28); }
-  .btn-ghost{ color:var(--paper); }
-  .btn-ghost:hover{ border-color:var(--signal); color:var(--signal); transform:translateY(-2px); }
-
-  .stack-ticker{
-    margin-top:3rem;
-    padding-top:1.6rem;
-    border-top:1px solid var(--line);
-    font-family:var(--font-mono);
-    font-size:0.78rem;
-    color:var(--mute);
-    display:flex;
-    flex-wrap:wrap;
-    gap:0.5rem 1.4rem;
-  }
-  .stack-ticker span{ color:var(--signal); }
-
-  /* ---------- SECTIONS ---------- */
-  section{ position:relative; z-index:1; padding:110px 0; }
-  .section-head{ max-width:640px; margin-bottom:3.2rem; }
-  .section-head h2{
-    font-size:clamp(1.8rem, 3.4vw, 2.6rem);
-  }
-  .section-head p.lead{
-    color:var(--mute);
-    margin-top:0.9rem;
-    font-size:1.02rem;
-  }
-
-  /* ABOUT */
-  .about-grid{
-    display:grid;
-    grid-template-columns:0.9fr 1.4fr;
-    gap:3.5rem;
-    align-items:start;
-  }
-  .portrait-frame{
-    position:relative;
-    border-radius:16px;
-    padding:10px;
-    background:linear-gradient(160deg, var(--panel), var(--panel-2));
-    border:1px solid var(--line);
-    box-shadow:0 1px 3px rgba(16,31,51,0.06), 0 20px 40px -20px rgba(16,31,51,0.18);
-  }
-  .portrait-frame img{
-    border-radius:10px;
-    width:100%;
-    aspect-ratio:1/1;
-    object-fit:cover;
-    filter:grayscale(15%) contrast(1.05);
-  }
-  .portrait-frame .corner{
-    position:absolute; width:18px; height:18px;
-    border:2px solid var(--signal);
-  }
-  .portrait-frame .c-tl{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
-  .portrait-frame .c-br{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
-
-  .about-text p{ color:var(--body-copy); margin:0 0 1.1rem; }
-  .about-text p strong{ color:var(--paper); }
-
-  .readout-grid{
-    margin-top:2rem;
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-    border-radius:12px;
-    overflow:hidden;
-  }
-  .readout{
-    background:var(--panel);
-    padding:1.4rem 1.2rem;
-  }
-  .readout .num{
-    font-family:var(--font-display);
-    font-size:1.9rem;
-    font-weight:700;
-    color:var(--signal);
-  }
-  .readout .lbl{
-    font-family:var(--font-mono);
-    font-size:0.72rem;
-    color:var(--mute);
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-    margin-top:0.3rem;
-  }
-
-  /* SKILLS */
-  .skills-section{ background:linear-gradient(180deg, transparent, rgba(238,242,248,0.7) 15%, rgba(238,242,248,0.7) 85%, transparent); }
-  .skill-board{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:1rem;
-  }
-  .skill-card{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:1.4rem 1.2rem;
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 1px 2px rgba(16,31,51,0.04);
-    transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
-  }
-  .skill-card:hover{ border-color:var(--signal-dim); transform:translateY(-3px); box-shadow:0 14px 28px rgba(16,31,51,0.08); }
-  .skill-card .name{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:1.02rem;
-  }
-  .skill-card .tag{
-    font-family:var(--font-mono);
-    font-size:0.68rem;
-    color:var(--mute);
-    margin-top:0.35rem;
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-  }
-  .skill-card .wave{
-    margin-top:1rem;
-    height:20px;
-    display:block;
-  }
-  .skill-card .wave path{
-    stroke:var(--mute);
-    stroke-width:1.5;
-    fill:none;
-    transition:stroke .25s ease;
-  }
-  .skill-card:hover .wave path{ stroke:var(--signal); }
-
-  /* PROJECTS */
-  .filter-row{
-    display:flex; gap:0.6rem; flex-wrap:wrap;
-    margin-bottom:2.4rem;
-  }
-  .filter-btn{
-    font-family:var(--font-mono);
-    font-size:0.75rem;
-    padding:8px 16px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    color:var(--mute);
-    background:transparent;
-    cursor:pointer;
-    transition:all .2s ease;
-  }
-  .filter-btn.active, .filter-btn:hover{
-    color:var(--ink);
-    background:var(--signal);
-    border-color:var(--signal);
-  }
-
-  .project-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:1.4rem;
-  }
-  .project-grid .full{ grid-column:1 / -1; }
-
-  .project-card{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-left:3px solid var(--signal-dim);
-    border-radius:10px;
-    padding:1.7rem 1.6rem;
-    height:100%;
-    display:flex; flex-direction:column;
-    box-shadow:0 1px 2px rgba(16,31,51,0.04);
-    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-  }
-  .project-card:hover{
-    transform:translateY(-4px);
-    border-left-color:var(--signal);
-    box-shadow:0 18px 34px rgba(16,31,51,0.12);
-  }
-  .project-card .top-row{
-    display:flex; justify-content:space-between; align-items:flex-start;
-    gap:1rem;
-  }
-  .project-card h3{
-    font-size:1.12rem;
-    font-weight:600;
-  }
-  .live-badge{
-    font-family:var(--font-mono);
-    font-size:0.62rem;
-    color:#3ee08a;
-    border:1px solid rgba(62,224,138,0.35);
-    background:rgba(62,224,138,0.08);
-    padding:3px 8px;
-    border-radius:999px;
-    white-space:nowrap;
-    display:flex; align-items:center; gap:5px;
-  }
-  .live-badge::before{
-    content:""; width:6px; height:6px; border-radius:50%;
-    background:#3ee08a;
-  }
-  .tech-tags{
-    display:flex; flex-wrap:wrap; gap:0.4rem;
-    margin:0.9rem 0 0.9rem;
-  }
-  .tech-tags span{
-    font-family:var(--font-mono);
-    font-size:0.68rem;
-    color:var(--signal);
-    background:rgba(8,145,178,0.08);
-    border:1px solid rgba(8,145,178,0.22);
-    padding:3px 9px;
-    border-radius:6px;
-  }
-  .project-card p.desc{
-    color:var(--mute);
-    font-size:0.92rem;
-    flex-grow:1;
-  }
-  .project-card .visit{
-    margin-top:1.1rem;
-    font-family:var(--font-mono);
-    font-size:0.8rem;
-    color:var(--paper);
-    display:inline-flex; align-items:center; gap:0.5rem;
-    width:fit-content;
-    border-bottom:1px solid var(--line);
-    padding-bottom:2px;
-    transition:border-color .2s ease, color .2s ease;
-  }
-  .project-card .visit:hover{ color:var(--signal); border-color:var(--signal); }
-
-  .extra-panel{
-    background:var(--panel-2);
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:1.8rem 1.9rem;
-  }
-  .extra-panel h3{ font-size:1.1rem; margin-bottom:1rem; }
-  .extra-panel ul{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:0.7rem 2rem; }
-  .extra-panel li{
-    font-size:0.92rem; color:var(--body-copy);
-    display:flex; gap:0.6rem;
-  }
-  .extra-panel li::before{ content:"›"; color:var(--signal); font-weight:700; }
-
-  /* CONTACT */
-  .contact-panel{
-    background:linear-gradient(160deg, var(--panel), var(--panel-2));
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:3.2rem;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:2rem;
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 1px 3px rgba(16,31,51,0.06), 0 30px 60px -30px rgba(16,31,51,0.25);
-  }
-  .contact-panel::before{
-    content:"";
-    position:absolute; inset:-40% -10% auto auto;
-    width:340px; height:340px;
-    background:radial-gradient(circle, rgba(8,145,178,0.14), transparent 70%);
-    pointer-events:none;
-  }
-  .contact-left h2{ font-size:clamp(1.6rem, 3vw, 2.2rem); margin-bottom:0.9rem; }
-  .contact-left p{ color:var(--mute); max-width:38ch; }
-  .contact-list{ display:flex; flex-direction:column; gap:1rem; }
-  .contact-row{
-    display:flex; align-items:center; gap:0.9rem;
-    font-family:var(--font-mono);
-    font-size:0.9rem;
-    padding:0.9rem 1.1rem;
-    background:rgba(16,31,51,0.025);
-    border:1px solid var(--line);
-    border-radius:10px;
-    transition:border-color .2s ease, background .2s ease;
-  }
-  .contact-row:hover{ border-color:var(--signal-dim); background:rgba(8,145,178,0.06); }
-  .contact-row .k{ color:var(--mute); min-width:64px; }
-  .contact-row a{ color:var(--paper); }
-  .contact-row a:hover{ color:var(--signal); }
-
-  footer{
-    padding:2rem 0;
-    text-align:center;
-    font-family:var(--font-mono);
-    font-size:0.76rem;
-    color:var(--mute);
-    border-top:1px solid var(--line);
-  }
-
-  /* reveal on scroll */
-  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-
-  @media (prefers-reduced-motion: reduce){
-    .reveal{ opacity:1; transform:none; transition:none; }
-    .status-chip .ping{ animation:none; }
-  }
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 980px){
-    .about-grid{ grid-template-columns:1fr; }
-    .portrait-frame{ max-width:320px; }
-    .skill-board{ grid-template-columns:repeat(2, 1fr); }
-    .project-grid{ grid-template-columns:1fr; }
-    .extra-panel ul{ grid-template-columns:1fr; }
-    .contact-panel{ grid-template-columns:1fr; padding:2.2rem; }
-    #globe-canvas{ width:100vw; height:60%; top:auto; bottom:0; right:0; opacity:0.5; }
-    .hero-inner{ grid-template-columns:1fr; }
-    .hero{ min-height:auto; padding:110px 0 70px; }
-  }
-
-  @media (max-width: 760px){
-    nav.links{
-      position:fixed; top:72px; left:0; right:0;
-      background:rgba(255,255,255,0.98);
-      backdrop-filter:blur(10px);
-      flex-direction:column;
-      align-items:flex-start;
-      gap:0;
-      padding:0.5rem 6vw 1.4rem;
-      border-bottom:1px solid var(--line);
-      box-shadow:0 16px 30px rgba(16,31,51,0.08);
-      transform:translateY(-8px);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .2s ease, transform .2s ease;
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --surface: #ffffff;
+      --surface-soft: #eef2f7;
+      --text: #172033;
+      --muted: #667085;
+      --line: #dfe4ec;
+      --primary: #3157d5;
+      --primary-dark: #243fa8;
+      --accent: #0f9d7a;
+      --shadow: 0 18px 50px rgba(22, 34, 62, .10);
+      --container: min(1160px, calc(100% - 40px));
+      --font-display: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
-    nav.links.open{ opacity:1; transform:translateY(0); pointer-events:auto; }
-    nav.links a{ padding:0.85rem 0; width:100%; border-bottom:1px solid var(--line); font-size:0.95rem; }
-    nav.links a:last-child{ border-bottom:none; }
-    .burger{ display:block; }
-    .readout-grid{ grid-template-columns:1fr; }
-    .skill-board{ grid-template-columns:1fr 1fr; }
-  }
 
-  @media (max-width: 480px){
-    .hero-cta{ flex-direction:column; align-items:stretch; }
-    .btn{ justify-content:center; }
-    .contact-panel{ padding:1.6rem; }
-    .skill-board{ grid-template-columns:1fr; }
-  }
-</style>
-</head>
-<body>
-
-<header class="nav">
-  <div class="nav-inner">
-    <a href="#home" class="brand"><span class="dot"></span>Chandan Sharma<small>&nbsp;/ full-stack &amp; telephony</small></a>
-    <nav class="links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
-  </div>
-</header>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <canvas id="globe-canvas"></canvas>
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <span class="status-chip"><span class="ping"></span>AVAILABLE FOR NEW PROJECTS</span>
-      <h1>Building the <span class="accent">systems</span><br>behind the call.</h1>
-      <p class="role">Full-Stack Developer <span class="sep">/</span> Telephony &amp; VoIP Systems <span class="sep">/</span> Cloud CRM</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-solid">Hire Me →</a>
-        <a href="Chandan Sharma Resume 28-04-2026.pdf" class="btn btn-ghost" download>Download Résumé</a>
-      </div>
-      <div class="stack-ticker">
-        <span>PHP</span>·<span>MySQL</span>·<span>Node.js</span>·<span>React</span>·<span>Asterisk</span>·<span>Linux</span>·<span>Cloud APIs</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="wrap">
-    <div class="line-label">Line 01 — About</div>
-    <div class="about-grid">
-      <div class="reveal">
-        <div class="portrait-frame">
-          <span class="corner c-tl"></span>
-          <img src="imgchandan.png" alt="Portrait of Chandan Sharma" />
-          <span class="corner c-br"></span>
-        </div>
-      </div>
-      <div class="about-text reveal">
-        <p><strong>I'm Chandan Sharma</strong>, a Full Stack Developer with strong experience building Telephony CRM, VoIP Billing Software, Asterisk Dialplans, admin panels, automation tools, and custom web applications. I specialize in PHP, MySQL, React.js, Node.js, Asterisk, Linux, and API integrations — with a strong focus on clean code, performance, and solutions that actually scale.</p>
-        <p>I'm a quick learner and always open to new technology. Every project is a chance to understand a real business problem and turn it into a reliable technical system — I've handled complex requirements by staying close to what the business actually needs, not just what's easy to build.</p>
-        <p>Over time my role has grown from individual contributor to leading development efforts — guiding my team, reviewing code quality, and making sure projects ship on time without cutting corners. I believe in teamwork, continuous improvement, and building systems that add real business value.</p>
-
-        <div class="readout-grid">
-          <div class="readout">
-            <div class="num">500+</div>
-            <div class="lbl">Call routing APIs shipped</div>
-          </div>
-          <div class="readout">
-            <div class="num">15+</div>
-            <div class="lbl">Production systems built</div>
-          </div>
-          <div class="readout">
-            <div class="num">3</div>
-            <div class="lbl">Domains: Telephony · CRM · VoIP</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="skills-section">
-  <div class="wrap">
-    <div class="line-label">Line 02 — Skills</div>
-    <div class="section-head reveal">
-      <h2>The stack behind every dial tone.</h2>
-      <p class="lead">Tools I reach for daily, from the database up to the dialplan.</p>
-    </div>
-    <div class="skill-board reveal">
-      <div class="skill-card">
-        <div class="name">PHP / MySQL</div>
-        <div class="tag">Backend &amp; data</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 Q10 2, 20 10 T40 10 T60 10 T80 10 T100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">JavaScript</div>
-        <div class="tag">Frontend logic</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 Q10 18, 20 10 T40 10 T60 10 T80 10 T100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">Node.js</div>
-        <div class="tag">Realtime services</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 Q10 4, 20 10 T40 16 T60 4 T80 16 T100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">Asterisk</div>
-        <div class="tag">PBX &amp; dialplan</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 L10 2 L20 18 L30 4 L40 16 L50 6 L60 14 L70 10 L80 10 L100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">Cloud APIs</div>
-        <div class="tag">Integrations</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 Q10 2, 20 10 T40 10 T60 2 T80 10 T100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">Linux Server</div>
-        <div class="tag">Infra &amp; hosting</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 Q10 16, 20 10 T40 4 T60 10 T80 16 T100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">Telephony Dialer</div>
-        <div class="tag">Call routing &amp; OBD</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 L8 3 L16 17 L24 3 L32 17 L40 10 L100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">React.js</div>
-        <div class="tag">Admin dashboards</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 Q10 2, 20 10 T40 18 T60 2 T80 18 T100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">CodeIgniter</div>
-        <div class="tag">PHP framework</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 L14 10 L20 2 L28 18 L36 10 L100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">WordPress</div>
-        <div class="tag">CMS &amp; theming</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 Q10 4, 20 10 T40 4 T60 10 T80 4 T100 10"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">Hosting &amp; Domains</div>
-        <div class="tag">cPanel &amp; setup</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 16 L20 16 L20 6 L40 6 L40 14 L60 14 L60 4 L80 4 L80 16 L100 16"/></svg>
-      </div>
-      <div class="skill-card">
-        <div class="name">DNS &amp; Email</div>
-        <div class="tag">MX, SPF &amp; DKIM config</div>
-        <svg class="wave" viewBox="0 0 100 20"><path d="M0 10 Q10 18, 20 10 T40 2 T60 18 T80 2 T100 10"/></svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="wrap">
-    <div class="line-label">Line 03 — Projects</div>
-    <div class="section-head reveal">
-      <h2>Systems I've built and shipped.</h2>
-      <p class="lead">Telephony platforms, CRMs and web apps running in production today.</p>
-    </div>
-
-    <div class="filter-row reveal" id="filterRow">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="telephony">Telephony</button>
-      <button class="filter-btn" data-filter="crm">CRM</button>
-      <button class="filter-btn" data-filter="web">Web</button>
-    </div>
-
-    <div class="project-grid reveal" id="projectGrid">
-
-      <div class="project-card" data-cat="web telephony">
-        <div class="top-row">
-          <h3>Jitsi Meet — Video Conferencing</h3>
-          <span class="live-badge">Live</span>
-        </div>
-        <div class="tech-tags"><span>JavaScript</span><span>Bootstrap</span><span>REST APIs</span></div>
-        <p class="desc">Deployed and configured Jitsi Meet on an Ubuntu server from the official repository — production-ready, secured, and whitelisted for the Next2Call ecosystem's internal and client meetings.</p>
-        <a href="https://meet.next2call.com/" target="_blank" rel="noopener" class="visit">Visit project →</a>
-      </div>
-
-      <div class="project-card" data-cat="web crm">
-        <div class="top-row">
-          <h3>Next2Call — Corporate Site &amp; Admin Panel</h3>
-          <span class="live-badge">Live</span>
-        </div>
-        <div class="tech-tags"><span>PHP</span><span>JavaScript</span><span>PHPMailer</span><span>APIs</span></div>
-        <p class="desc">Official Next2Call corporate website with an admin panel that tracks visitors, job applications, enquiries and email communication for the whole business.</p>
-        <a href="https://next2call.com" target="_blank" rel="noopener" class="visit">Visit project →</a>
-      </div>
-
-      <div class="project-card" data-cat="telephony web">
-        <div class="top-row">
-          <h3>WebRTC Click-to-Call Web Phone</h3>
-          <span class="live-badge">Live</span>
-        </div>
-        <div class="tech-tags"><span>Node.js</span><span>WebRTC</span><span>JavaScript</span></div>
-        <p class="desc">Browser-based click-to-call phone with no hardware dependency, built for instant calling inside larger telephony and CRM workflows.</p>
-        <a href="https://ststephenschurch.in/admin/Phone/" target="_blank" rel="noopener" class="visit">Visit project →</a>
-      </div>
-
-      <div class="project-card" data-cat="crm">
-        <div class="top-row">
-          <h3>Flight Booking CRM</h3>
-          <span class="live-badge">Live</span>
-        </div>
-        <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
-        <p class="desc">Flight booking CRM with automated ticket confirmation emails, agent/admin notifications, and email authentication.</p>
-        <a href="https://crm.orgmytrip.com" target="_blank" rel="noopener" class="visit">Visit project →</a>
-      </div>
-
-      <div class="project-card" data-cat="crm telephony">
-        <div class="top-row">
-          <h3>Novillo CRM</h3>
-          <span class="live-badge">Live</span>
-        </div>
-        <div class="tech-tags"><span>PHP</span><span>Asterisk</span></div>
-        <p class="desc">Advanced call-tracking CRM with bid-priority lead distribution and analytics.</p>
-        <a href="https://nov-i.com" target="_blank" rel="noopener" class="visit">Visit project →</a>
-      </div>
-
-      <div class="project-card" data-cat="web">
-        <div class="top-row">
-          <h3>Data Entry Automation CRM</h3>
-          <span class="live-badge">Live</span>
-        </div>
-        <div class="tech-tags"><span>PHP</span><span>JavaScript</span></div>
-        <p class="desc">Multi-type data entry automation system with integrated email workflows.</p>
-        <a href="https://next2call.com/dataentry/" target="_blank" rel="noopener" class="visit">Visit project →</a>
-      </div>
-
-      <div class="project-card" data-cat="telephony">
-        <div class="top-row"><h3>Next2Call — Cloud Communication Platform</h3></div>
-        <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
-        <p class="desc">VoIP communication platform managing telecom services and infrastructure.</p>
-      </div>
-
-      <div class="project-card" data-cat="crm">
-        <div class="top-row"><h3>Ticket CRM</h3></div>
-        <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
-        <p class="desc">Client ticket management system handling new, pending, and closed tickets.</p>
-      </div>
-
-      <div class="project-card" data-cat="telephony crm">
-        <div class="top-row"><h3>Cloud Telephony CRM</h3></div>
-        <div class="tech-tags"><span>PHP</span><span>Asterisk</span></div>
-        <p class="desc">Live call routing, agent monitoring, and call-center admin controls.</p>
-      </div>
-
-      <div class="project-card" data-cat="telephony">
-        <div class="top-row"><h3>Dialer Cloud Telephony</h3></div>
-        <div class="tech-tags"><span>PHP</span><span>Asterisk</span></div>
-        <p class="desc">Dialer-based call routing with live tracking and reporting.</p>
-      </div>
-
-      <div class="project-card" data-cat="web">
-        <div class="top-row"><h3>Chat Panel</h3></div>
-        <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
-        <p class="desc">Bulk and global messaging panel for multi-user communication.</p>
-      </div>
-
-      <div class="project-card" data-cat="web crm">
-        <div class="top-row">
-          <h3>ShareCharge — EV Charging Platform</h3>
-          <span class="live-badge">Live</span>
-        </div>
-        <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
-        <p class="desc">B2C EV charging system with wallet, admin, distributor and user roles.</p>
-        <a href="https://sharecharge.in" target="_blank" rel="noopener" class="visit">Visit project →</a>
-      </div>
-
-      <div class="project-card" data-cat="telephony">
-        <div class="top-row"><h3>Billing Switch &amp; Ringfy Telephony (Backend)</h3></div>
-        <div class="tech-tags"><span>Node.js</span><span>PHP</span><span>Asterisk</span></div>
-        <p class="desc">Backend systems for billing, DID management, call routing and reporting.</p>
-      </div>
-
-      <div class="project-card" data-cat="web">
-        <div class="top-row"><h3>PMPWANI WiFi Platform</h3></div>
-        <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
-        <p class="desc">B2C WiFi hotspot management platform with admin and distributor roles.</p>
-      </div>
-
-      <div class="project-card full" data-cat="crm web">
-        <div class="top-row"><h3>College Library Management System</h3></div>
-        <div class="tech-tags"><span>CodeIgniter</span><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
-        <p class="desc">A large-scale library management system built on the CodeIgniter PHP framework for a college. Manages the full book catalogue, issue/return tracking with due-date rules and fines, student &amp; staff member records, and admin-side reporting — all from a single dashboard.</p>
-      </div>
-
-      <div class="project-card" data-cat="crm web">
-        <div class="top-row"><h3>Gas Agency — Registration &amp; KYC Portal</h3></div>
-        <div class="tech-tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
-        <p class="desc">Compact admin panel built for a gas agency to register new customers and manage their KYC document verification, keeping all customer records organized in one place.</p>
-      </div>
-
-      <div class="project-card full" data-cat="all telephony crm web">
-        <div class="extra-panel" style="border:none; background:transparent; padding:0;">
-          <h3>Additional professional experience</h3>
-          <ul>
-            <li>500+ custom call routing APIs built to client spec</li>
-            <li>Cloud telephony dialer &amp; call center solutions</li>
-            <li>OBD CRM with IVR blast for domestic &amp; global campaigns</li>
-            <li>Blog, shopping &amp; church websites on WordPress</li>
-            <li>Hosting ops — cPanel, email config, domain &amp; subdomain management</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="line-label">Line 04 — Contact</div>
-    <div class="contact-panel reveal">
-      <div class="contact-left">
-        <h2>Let's build something reliable.</h2>
-        <p>Got a project idea or need someone to own the backend? I'm happy to talk it through.</p>
-      </div>
-      <div class="contact-list">
-        <div class="contact-row"><span class="k">Email</span><a href="mailto:sharmachandan7706@gmail.com">sharmachandan7706@gmail.com</a></div>
-        <div class="contact-row"><span class="k">Phone</span><a href="tel:+917706912044">+91 7706912044</a></div>
-        <div class="contact-row"><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/chandan-sharma-337968253" target="_blank" rel="noopener">linkedin.com/in/chandan-sharma</a></div>
-        <div class="contact-row"><span class="k">GitHub</span><a href="https://github.com/programmerchandansharma" target="_blank" rel="noopener">github.com/programmerchandansharma</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2025 Chandan Sharma. All rights reserved.
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script>
-(function(){
-  // ---------- mobile nav ----------
-  var burger = document.getElementById('burger');
-  var navLinks = document.getElementById('navLinks');
-  burger.addEventListener('click', function(){
-    var open = navLinks.classList.toggle('open');
-    burger.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-  });
-  navLinks.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      navLinks.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', false);
-    });
-  });
-
-  // ---------- scroll reveal ----------
-  var revealEls = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(function(el){ io.observe(el); });
-  } else {
-    revealEls.forEach(function(el){ el.classList.add('in'); });
-  }
-
-  // ---------- project filter ----------
-  var filterBtns = document.querySelectorAll('.filter-btn');
-  var cards = document.querySelectorAll('#projectGrid .project-card');
-  filterBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      filterBtns.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      var f = btn.getAttribute('data-filter');
-      cards.forEach(function(card){
-        var cats = (card.getAttribute('data-cat') || '').split(' ');
-        card.style.display = (f === 'all' || cats.indexOf(f) !== -1) ? '' : 'none';
-      });
-    });
-  });
-
-  // ---------- 3D call-network globe ----------
-  var canvas = document.getElementById('globe-canvas');
-  if(!canvas || typeof THREE === 'undefined') return;
-
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-  camera.position.set(0, 0, 7.2);
-
-  var group = new THREE.Group();
-  scene.add(group);
-
-  // Fibonacci sphere node distribution
-  var NODE_COUNT = 90;
-  var RADIUS = 2.6;
-  var nodePositions = [];
-  (function(){
-    var offset = 2 / NODE_COUNT;
-    var increment = Math.PI * (3 - Math.sqrt(5));
-    for(var i=0;i<NODE_COUNT;i++){
-      var y = ((i * offset) - 1) + (offset / 2);
-      var r = Math.sqrt(1 - y*y);
-      var phi = i * increment;
-      var x = Math.cos(phi) * r;
-      var z = Math.sin(phi) * r;
-      nodePositions.push(new THREE.Vector3(x*RADIUS, y*RADIUS, z*RADIUS));
+    * {
+      box-sizing: border-box
     }
-  })();
 
-  // node points
-  var nodeGeo = new THREE.BufferGeometry().setFromPoints(nodePositions);
-  var nodeMat = new THREE.PointsMaterial({ color: 0x0891b2, size: 0.06, transparent:true, opacity:0.9 });
-  var nodePoints = new THREE.Points(nodeGeo, nodeMat);
-  group.add(nodePoints);
-
-  // wireframe shell for structure
-  var shellGeo = new THREE.IcosahedronGeometry(RADIUS, 2);
-  var shellMat = new THREE.MeshBasicMaterial({ color: 0x0f2d3d, wireframe:true, transparent:true, opacity:0.10 });
-  var shell = new THREE.Mesh(shellGeo, shellMat);
-  group.add(shell);
-
-  // connections: link each node to a few nearest neighbours
-  var connectionPairs = [];
-  var MAX_LINKS_PER_NODE = 2;
-  var MAX_DIST = 1.15;
-  for(var i=0;i<nodePositions.length;i++){
-    var dists = [];
-    for(var j=0;j<nodePositions.length;j++){
-      if(i===j) continue;
-      var d = nodePositions[i].distanceTo(nodePositions[j]);
-      if(d < MAX_DIST) dists.push([d, j]);
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 86px
     }
-    dists.sort(function(a,b){ return a[0]-b[0]; });
-    for(var k=0;k<Math.min(MAX_LINKS_PER_NODE, dists.length);k++){
-      var pair = [i, dists[k][1]];
-      var key = Math.min(pair[0],pair[1])+'-'+Math.max(pair[0],pair[1]);
-      if(connectionPairs.indexOf(key) === -1){
-        connectionPairs.push(key);
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .wrap {
+      width: var(--container);
+      margin: auto
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      margin: 0;
+      letter-spacing: -.025em
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent
+    }
+
+    ::selection {
+      background: #cbd7ff;
+      color: var(--text)
+    }
+
+    header.nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      background: rgba(255, 255, 255, .88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(223, 228, 236, .9)
+    }
+
+    .nav-inner {
+      width: var(--container);
+      height: 76px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      white-space: nowrap
+    }
+
+    .brand .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary)
+    }
+
+    .brand small {
+      font: 500 .69rem var(--font-mono);
+      color: var(--muted)
+    }
+
+    nav.links {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center
+    }
+
+    nav.links a {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--muted);
+      transition: .2s
+    }
+
+    nav.links a:hover,
+    nav.links a.active {
+      color: var(--primary)
+    }
+
+    .burger {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      position: relative;
+      cursor: pointer
+    }
+
+    .burger span,
+    .burger span:before,
+    .burger span:after {
+      content: "";
+      position: absolute;
+      left: 11px;
+      right: 11px;
+      height: 2px;
+      background: var(--text);
+      transition: .25s
+    }
+
+    .burger span {
+      top: 20px
+    }
+
+    .burger span:before {
+      top: -7px
+    }
+
+    .burger span:after {
+      top: 7px
+    }
+
+    .burger.open span {
+      background: transparent
+    }
+
+    .burger.open span:before {
+      transform: translateY(7px) rotate(45deg)
+    }
+
+    .burger.open span:after {
+      transform: translateY(-7px) rotate(-45deg)
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding: 140px 0 90px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fff 0%, #f7f8fc 100%)
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      width: 640px;
+      height: 640px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(49, 87, 213, .12), transparent 68%);
+      right: -180px;
+      top: 70px
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: var(--container);
+      margin: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, .8fr);
+      align-items: center;
+      gap: 48px
+    }
+
+    .hero-copy {
+      max-width: 720px
+    }
+
+    #globe-canvas {
+      position: absolute;
+      z-index: 1;
+      right: max(2vw, 20px);
+      top: 115px;
+      width: min(47vw, 640px);
+      height: calc(100% - 150px);
+      opacity: .75;
+      pointer-events: none
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #eefaf6;
+      border: 1px solid #bfe9dc;
+      color: #08775d;
+      font: 600 .74rem var(--font-mono);
+      margin-bottom: 1.6rem
+    }
+
+    .ping {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(15, 157, 122, .12)
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3rem, 6vw, 5.65rem);
+      line-height: .98;
+      font-weight: 800;
+      max-width: 820px
+    }
+
+    .hero-copy h1 .accent {
+      color: var(--primary)
+    }
+
+    .hero-copy .role {
+      margin-top: 1.35rem;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.7vw, 1.15rem);
+      max-width: 680px
+    }
+
+    .role .sep {
+      color: #aab2c2;
+      margin: 0 .4rem
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 2rem
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 21px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font: 600 .88rem var(--font-body);
+      transition: .2s
+    }
+
+    .btn-solid {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary)
+    }
+
+    .btn-solid:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px)
+    }
+
+    .btn-ghost {
+      background: #fff
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--primary);
+      color: var(--primary)
+    }
+
+    .stack-ticker {
+      margin-top: 2.4rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem 1rem;
+      color: var(--muted);
+      font: 500 .76rem var(--font-mono)
+    }
+
+    .stack-ticker span {
+      color: var(--primary)
+    }
+
+    section {
+      position: relative;
+      padding: 20px 0
+    }
+
+    .line-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      font: 600 .74rem var(--font-mono);
+      letter-spacing: .1em;
+      text-transform: uppercase
+    }
+
+    .line-label:before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--primary)
+    }
+
+    .section-head {
+      max-width: 700px;
+      margin-bottom: 2.6rem
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 3.15rem)
+    }
+
+    .section-head .lead {
+      margin: .8rem 0 0;
+      color: var(--muted);
+      font-size: 1.02rem
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 64px;
+      align-items: start
+    }
+
+    .portrait-frame {
+      background: var(--surface);
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 110px
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 16px
+    }
+
+    .portrait-frame .corner {
+      display: none
+    }
+
+    .about-text p {
+      margin: 0 0 1rem;
+      color: #475467
+    }
+
+    .about-text strong {
+      color: var(--text)
+    }
+
+    .readout-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 2rem
+    }
+
+    .readout {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 1.35rem;
+      border-radius: 16px
+    }
+
+    .readout .num {
+      font: 700 1.8rem var(--font-display);
+      color: var(--primary)
+    }
+
+    .readout .lbl {
+      margin-top: .25rem;
+      color: var(--muted);
+      font-size: .76rem
+    }
+
+    .skills-section {
+      background: #111827;
+      color: #f8fafc
+    }
+
+    .skills-section .line-label,
+    .skills-section .skill-card .tag {
+      color: #9fb1ff
+    }
+
+    .skills-section .section-head .lead {
+      color: #b7c0cf
+    }
+
+    .skill-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px
+    }
+
+    .skill-card {
+      background: #182235;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 16px;
+      padding: 1.35rem;
+      transition: .2s
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(159, 177, 255, .55);
+      background: #1d2940
+    }
+
+    .skill-card .name {
+      font: 600 1rem var(--font-display)
+    }
+
+    .skill-card .tag {
+      font: 500 .68rem var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-top: .3rem
+    }
+
+    .skill-card .wave {
+      height: 20px;
+      margin-top: .9rem
+    }
+
+    .skill-card .wave path {
+      stroke: #72809b;
+      stroke-width: 1.5;
+      fill: none
+    }
+
+    .skill-card:hover .wave path {
+      stroke: #a8b8ff
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 2rem
+    }
+
+    .filter-btn {
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-weight: 600;
+      cursor: pointer
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--text);
+      border-color: var(--text);
+      color: #fff
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px
+    }
+
+    .project-grid .full {
+      grid-column: 1/-1
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.55rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 250px;
+      transition: .2s
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: #cdd5e3
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px
+    }
+
+    .project-card h3 {
+      font-size: 1.13rem
+    }
+
+    .live-badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #edf9f5;
+      color: #08775d;
+      font: 600 .65rem var(--font-mono)
+    }
+
+    .tech-tags {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin: .9rem 0
+    }
+
+    .tech-tags span {
+      font: 600 .67rem var(--font-mono);
+      color: var(--primary);
+      background: #eef2ff;
+      padding: 4px 8px;
+      border-radius: 7px
+    }
+
+    .project-card .desc {
+      color: var(--muted);
+      font-size: .92rem;
+      flex: 1
+    }
+
+    .visit {
+      margin-top: 1rem;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: .86rem
+    }
+
+    .extra-panel {
+      background: var(--surface-soft);
+      border-radius: 16px;
+      padding: 1.5rem
+    }
+
+    .extra-panel ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .7rem 2rem;
+      padding: 0;
+      margin: 1rem 0 0;
+      list-style: none
+    }
+
+    .extra-panel li {
+      color: #475467
+    }
+
+    .extra-panel li:before {
+      content: "✓";
+      color: var(--accent);
+      margin-right: .6rem;
+      font-weight: 700
+    }
+
+    .contact-panel {
+      background: var(--text);
+      color: #fff;
+      border-radius: 24px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 36px;
+      box-shadow: var(--shadow)
+    }
+
+    .contact-left h2 {
+      font-size: clamp(2rem, 4vw, 3rem)
+    }
+
+    .contact-left p {
+      color: #b8c1d0
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(255, 255, 255, .11);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .04);
+      overflow-wrap: anywhere
+    }
+
+    .contact-row .k {
+      min-width: 68px;
+      color: #9ba7ba;
+      font-size: .8rem
+    }
+
+    .contact-row a:hover {
+      color: #b8c7ff
+    }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .78rem;
+      border-top: 1px solid var(--line)
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:980px) {
+      .hero {
+        min-height: auto;
+        padding: 130px 0 85px
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr
+      }
+
+      .hero-copy {
+        max-width: 760px
+      }
+
+      #globe-canvas {
+        right: -120px;
+        top: 140px;
+        width: 620px;
+        height: 520px;
+        opacity: .26
+      }
+
+      .about-grid {
+        grid-template-columns: 280px 1fr;
+        gap: 36px
+      }
+
+      .skill-board {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .contact-panel {
+        grid-template-columns: 1fr
+      }
+
+      .portrait-frame {
+        position: relative;
+        top: auto
       }
     }
-  }
-  var linePts = [];
-  connectionPairs.forEach(function(key){
-    var idx = key.split('-').map(Number);
-    linePts.push(nodePositions[idx[0]], nodePositions[idx[1]]);
-  });
-  var lineGeo = new THREE.BufferGeometry().setFromPoints(linePts);
-  var lineMat = new THREE.LineBasicMaterial({ color: 0x9fb4c9, transparent:true, opacity:0.55 });
-  var lines = new THREE.LineSegments(lineGeo, lineMat);
-  group.add(lines);
 
-  // a handful of "active call" pulsing lines
-  var pulseLines = [];
-  var PULSE_COUNT = Math.min(10, connectionPairs.length);
-  for(var p=0; p<PULSE_COUNT; p++){
-    var key = connectionPairs[Math.floor(Math.random()*connectionPairs.length)];
-    var idx = key.split('-').map(Number);
-    var geo = new THREE.BufferGeometry().setFromPoints([nodePositions[idx[0]], nodePositions[idx[1]]]);
-    var mat = new THREE.LineBasicMaterial({ color: 0xff7a45, transparent:true, opacity:0.9 });
-    var seg = new THREE.LineSegments(geo, mat);
-    seg.userData.phase = Math.random()*Math.PI*2;
-    seg.userData.speed = 0.8 + Math.random()*1.2;
-    pulseLines.push(seg);
-    group.add(seg);
-  }
+    @media(max-width:760px) {
+      :root {
+        --container: min(100% - 28px, 1160px)
+      }
 
-  function resize(){
-    var w = canvas.clientWidth, h = canvas.clientHeight;
-    if(w === 0 || h === 0) return;
-    renderer.setSize(w, h, false);
-    camera.aspect = w/h;
-    camera.updateProjectionMatrix();
-  }
-  window.addEventListener('resize', resize);
-  resize();
+      html {
+        scroll-padding-top: 72px
+      }
 
-  var mouseX = 0, mouseY = 0;
-  window.addEventListener('mousemove', function(e){
-    mouseX = (e.clientX / window.innerWidth) - 0.5;
-    mouseY = (e.clientY / window.innerHeight) - 0.5;
-  });
+      .nav-inner {
+        height: 68px
+      }
 
-  var clock = new THREE.Clock();
-  function animate(){
-    requestAnimationFrame(animate);
-    var t = clock.getElapsedTime();
+      .brand small {
+        display: none
+      }
 
-    if(!reduceMotion){
-      group.rotation.y = t * 0.12;
-      group.rotation.x = Math.sin(t*0.15)*0.08 + mouseY*0.3;
-    } else {
-      group.rotation.y = 0.3;
+      .burger {
+        display: block
+      }
+
+      nav.links {
+        position: fixed;
+        top: 68px;
+        left: 14px;
+        right: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: .2s
+      }
+
+      nav.links.open {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto
+      }
+
+      nav.links a {
+        padding: 13px 12px;
+        border-bottom: 1px solid var(--line)
+      }
+
+      nav.links a:last-child {
+        border-bottom: 0
+      }
+
+      .hero {
+        padding: 112px 0 64px;
+        min-height: 100svh;
+        align-items: flex-start
+      }
+
+      .hero:before {
+        width: 430px;
+        height: 430px;
+        right: -220px;
+        top: 100px
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.65rem, 13vw, 4.2rem);
+        line-height: 1.01
+      }
+
+      .hero-copy .role {
+        font-size: .98rem
+      }
+
+      .role .sep {
+        display: none
+      }
+
+      .role {
+        display: flex;
+        flex-direction: column;
+        gap: 4px
+      }
+
+      .hero-cta {
+        flex-direction: column
+      }
+
+      .btn {
+        width: 100%
+      }
+
+      .stack-ticker {
+        gap: .45rem .8rem
+      }
+
+      .stack-ticker {
+        max-width: 90%
+      }
+
+      #globe-canvas {
+        position: absolute;
+        right: -170px;
+        top: 270px;
+        width: 520px;
+        height: 460px;
+        opacity: .18
+      }
+
+      section {
+        padding: 72px 0
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px
+      }
+
+      .portrait-frame {
+        max-width: 300px
+      }
+
+      .readout-grid {
+        grid-template-columns: 1fr
+      }
+
+      .skill-board {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr
+      }
+
+      .project-grid .full {
+        grid-column: auto
+      }
+
+      .extra-panel ul {
+        grid-template-columns: 1fr
+      }
+
+      .contact-panel {
+        padding: 1.5rem;
+        border-radius: 18px
+      }
+
+      .contact-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px
+      }
+
+      .contact-row .k {
+        min-width: 0
+      }
     }
-    group.rotation.y += mouseX * 0.05;
 
-    pulseLines.forEach(function(seg){
-      var op = reduceMotion ? 0.5 : (0.15 + 0.75*Math.abs(Math.sin(t*seg.userData.speed + seg.userData.phase)));
-      seg.material.opacity = op;
-    });
+    @media(max-width:480px) {
+      .skill-board {
+        grid-template-columns: 1fr
+      }
 
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
-</script>
+      .hero-copy h1 br {
+        display: none
+      }
+
+      .status-chip {
+        font-size: .67rem
+      }
+
+      .line-label {
+        font-size: .68rem
+      }
+
+      .project-card {
+        min-height: auto
+      }
+
+      .contact-panel {
+        padding: 1.25rem
+      }
+
+      .portrait-frame {
+        max-width: 100%
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      html {
+        scroll-behavior: auto
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#home" class="brand"><span class="dot"></span>Chandan Sharma<small>&nbsp;/ full-stack &amp;
+          telephony</small></a>
+      <nav class="links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <canvas id="globe-canvas"></canvas>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="status-chip"><span class="ping"></span>AVAILABLE FOR NEW PROJECTS</span>
+        <h1>Building the <span class="accent">systems</span><br>behind the call.</h1>
+        <p class="role">Full-Stack Developer <span class="sep">/</span> Telephony &amp; VoIP Systems <span
+            class="sep">/</span> Cloud CRM</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-solid">Hire Me →</a>
+          <a href="Chandan Sharma Resume 28-04-2026.pdf" class="btn btn-ghost" download>Download Résumé</a>
+        </div>
+        <div class="stack-ticker">
+          <span>PHP</span>·<span>MySQL</span>·<span>Node.js</span>·<span>React</span>·<span>Asterisk</span>·<span>Linux</span>·<span>Cloud
+            APIs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="line-label">Line 01 — About</div>
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="portrait-frame">
+            <span class="corner c-tl"></span>
+            <img src="imgchandan.png" alt="Portrait of Chandan Sharma" />
+            <span class="corner c-br"></span>
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <p><strong>I'm Chandan Sharma</strong>, a Full Stack Developer with strong experience building Telephony CRM,
+            VoIP Billing Software, Asterisk Dialplans, admin panels, automation tools, and custom web applications. I
+            specialize in PHP, MySQL, React.js, Node.js, Asterisk, Linux, and API integrations — with a strong focus on
+            clean code, performance, and solutions that actually scale.</p>
+          <p>I'm a quick learner and always open to new technology. Every project is a chance to understand a real
+            business problem and turn it into a reliable technical system — I've handled complex requirements by staying
+            close to what the business actually needs, not just what's easy to build.</p>
+          <p>Over time my role has grown from individual contributor to leading development efforts — guiding my team,
+            reviewing code quality, and making sure projects ship on time without cutting corners. I believe in
+            teamwork, continuous improvement, and building systems that add real business value.</p>
+
+          <div class="readout-grid">
+            <div class="readout">
+              <div class="num">500+</div>
+              <div class="lbl">Call routing APIs shipped</div>
+            </div>
+            <div class="readout">
+              <div class="num">15+</div>
+              <div class="lbl">Production systems built</div>
+            </div>
+            <div class="readout">
+              <div class="num">3</div>
+              <div class="lbl">Domains: Telephony · CRM · VoIP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="skills-section">
+    <div class="wrap">
+      <div class="line-label">Line 02 — Skills</div>
+      <div class="section-head reveal">
+        <h2>The stack behind every dial tone.</h2>
+        <p class="lead">Tools I reach for daily, from the database up to the dialplan.</p>
+      </div>
+      <div class="skill-board reveal">
+        <div class="skill-card">
+          <div class="name">PHP / MySQL</div>
+          <div class="tag">Backend &amp; data</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 Q10 2, 20 10 T40 10 T60 10 T80 10 T100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">JavaScript</div>
+          <div class="tag">Frontend logic</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 Q10 18, 20 10 T40 10 T60 10 T80 10 T100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">Node.js</div>
+          <div class="tag">Realtime services</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 Q10 4, 20 10 T40 16 T60 4 T80 16 T100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">Asterisk</div>
+          <div class="tag">PBX &amp; dialplan</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 L10 2 L20 18 L30 4 L40 16 L50 6 L60 14 L70 10 L80 10 L100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">Cloud APIs</div>
+          <div class="tag">Integrations</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 Q10 2, 20 10 T40 10 T60 2 T80 10 T100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">Linux Server</div>
+          <div class="tag">Infra &amp; hosting</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 Q10 16, 20 10 T40 4 T60 10 T80 16 T100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">Telephony Dialer</div>
+          <div class="tag">Call routing &amp; OBD</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 L8 3 L16 17 L24 3 L32 17 L40 10 L100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">React.js</div>
+          <div class="tag">Admin dashboards</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 Q10 2, 20 10 T40 18 T60 2 T80 18 T100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">CodeIgniter</div>
+          <div class="tag">PHP framework</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 L14 10 L20 2 L28 18 L36 10 L100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">WordPress</div>
+          <div class="tag">CMS &amp; theming</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 Q10 4, 20 10 T40 4 T60 10 T80 4 T100 10" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">Hosting &amp; Domains</div>
+          <div class="tag">cPanel &amp; setup</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 16 L20 16 L20 6 L40 6 L40 14 L60 14 L60 4 L80 4 L80 16 L100 16" />
+          </svg>
+        </div>
+        <div class="skill-card">
+          <div class="name">DNS &amp; Email</div>
+          <div class="tag">MX, SPF &amp; DKIM config</div>
+          <svg class="wave" viewBox="0 0 100 20">
+            <path d="M0 10 Q10 18, 20 10 T40 2 T60 18 T80 2 T100 10" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="line-label">Line 03 — Projects</div>
+      <div class="section-head reveal">
+        <h2>Systems I've built and shipped.</h2>
+        <p class="lead">Telephony platforms, CRMs and web apps running in production today.</p>
+      </div>
+
+      <div class="filter-row reveal" id="filterRow">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="telephony">Telephony</button>
+        <button class="filter-btn" data-filter="crm">CRM</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+      </div>
+
+      <div class="project-grid reveal" id="projectGrid">
+
+        <div class="project-card" data-cat="web telephony">
+          <div class="top-row">
+            <h3>Jitsi Meet — Video Conferencing</h3>
+            <span class="live-badge">Live</span>
+          </div>
+          <div class="tech-tags"><span>JavaScript</span><span>Bootstrap</span><span>REST APIs</span></div>
+          <p class="desc">Deployed and configured Jitsi Meet on an Ubuntu server from the official repository —
+            production-ready, secured, and whitelisted for the Next2Call ecosystem's internal and client meetings.</p>
+          <a href="https://meet.next2call.com/" target="_blank" rel="noopener" class="visit">Visit project →</a>
+        </div>
+
+        <div class="project-card" data-cat="web crm">
+          <div class="top-row">
+            <h3>Next2Call — Corporate Site &amp; Admin Panel</h3>
+            <span class="live-badge">Live</span>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>JavaScript</span><span>PHPMailer</span><span>APIs</span></div>
+          <p class="desc">Official Next2Call corporate website with an admin panel that tracks visitors, job
+            applications, enquiries and email communication for the whole business.</p>
+          <a href="https://next2call.com" target="_blank" rel="noopener" class="visit">Visit project →</a>
+        </div>
+
+        <div class="project-card" data-cat="telephony web">
+          <div class="top-row">
+            <h3>WebRTC Click-to-Call Web Phone</h3>
+            <span class="live-badge">Live</span>
+          </div>
+          <div class="tech-tags"><span>Node.js</span><span>WebRTC</span><span>JavaScript</span></div>
+          <p class="desc">Browser-based click-to-call phone with no hardware dependency, built for instant calling
+            inside larger telephony and CRM workflows.</p>
+          <a href="https://ststephenschurch.in/admin/Phone/" target="_blank" rel="noopener" class="visit">Visit project
+            →</a>
+        </div>
+
+        <div class="project-card" data-cat="crm">
+          <div class="top-row">
+            <h3>Flight Booking CRM</h3>
+            <span class="live-badge">Live</span>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
+          <p class="desc">Flight booking CRM with automated ticket confirmation emails, agent/admin notifications, and
+            email authentication.</p>
+          <a href="https://crm.orgmytrip.com" target="_blank" rel="noopener" class="visit">Visit project →</a>
+        </div>
+
+        <div class="project-card" data-cat="crm telephony">
+          <div class="top-row">
+            <h3>Novillo CRM</h3>
+            <span class="live-badge">Live</span>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Asterisk</span></div>
+          <p class="desc">Advanced call-tracking CRM with bid-priority lead distribution and analytics.</p>
+          <a href="https://nov-i.com" target="_blank" rel="noopener" class="visit">Visit project →</a>
+        </div>
+
+        <div class="project-card" data-cat="web">
+          <div class="top-row">
+            <h3>Data Entry Automation CRM</h3>
+            <span class="live-badge">Live</span>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>JavaScript</span></div>
+          <p class="desc">Multi-type data entry automation system with integrated email workflows.</p>
+          <a href="https://next2call.com/dataentry/" target="_blank" rel="noopener" class="visit">Visit project →</a>
+        </div>
+
+        <div class="project-card" data-cat="telephony">
+          <div class="top-row">
+            <h3>Next2Call — Cloud Communication Platform</h3>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
+          <p class="desc">VoIP communication platform managing telecom services and infrastructure.</p>
+        </div>
+
+        <div class="project-card" data-cat="crm">
+          <div class="top-row">
+            <h3>Ticket CRM</h3>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
+          <p class="desc">Client ticket management system handling new, pending, and closed tickets.</p>
+        </div>
+
+        <div class="project-card" data-cat="telephony crm">
+          <div class="top-row">
+            <h3>Cloud Telephony CRM</h3>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Asterisk</span></div>
+          <p class="desc">Live call routing, agent monitoring, and call-center admin controls.</p>
+        </div>
+
+        <div class="project-card" data-cat="telephony">
+          <div class="top-row">
+            <h3>Dialer Cloud Telephony</h3>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Asterisk</span></div>
+          <p class="desc">Dialer-based call routing with live tracking and reporting.</p>
+        </div>
+
+        <div class="project-card" data-cat="web">
+          <div class="top-row">
+            <h3>Chat Panel</h3>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
+          <p class="desc">Bulk and global messaging panel for multi-user communication.</p>
+        </div>
+
+        <div class="project-card" data-cat="web crm">
+          <div class="top-row">
+            <h3>ShareCharge — EV Charging Platform</h3>
+            <span class="live-badge">Live</span>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
+          <p class="desc">B2C EV charging system with wallet, admin, distributor and user roles.</p>
+          <a href="https://sharecharge.in" target="_blank" rel="noopener" class="visit">Visit project →</a>
+        </div>
+
+        <div class="project-card" data-cat="telephony">
+          <div class="top-row">
+            <h3>Billing Switch &amp; Ringfy Telephony (Backend)</h3>
+          </div>
+          <div class="tech-tags"><span>Node.js</span><span>PHP</span><span>Asterisk</span></div>
+          <p class="desc">Backend systems for billing, DID management, call routing and reporting.</p>
+        </div>
+
+        <div class="project-card" data-cat="web">
+          <div class="top-row">
+            <h3>PMPWANI WiFi Platform</h3>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>Cloud APIs</span></div>
+          <p class="desc">B2C WiFi hotspot management platform with admin and distributor roles.</p>
+        </div>
+
+        <div class="project-card full" data-cat="crm web">
+          <div class="top-row">
+            <h3>College Library Management System</h3>
+          </div>
+          <div class="tech-tags"><span>CodeIgniter</span><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
+          <p class="desc">A large-scale library management system built on the CodeIgniter PHP framework for a college.
+            Manages the full book catalogue, issue/return tracking with due-date rules and fines, student &amp; staff
+            member records, and admin-side reporting — all from a single dashboard.</p>
+        </div>
+
+        <div class="project-card" data-cat="crm web">
+          <div class="top-row">
+            <h3>Gas Agency — Registration &amp; KYC Portal</h3>
+          </div>
+          <div class="tech-tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
+          <p class="desc">Compact admin panel built for a gas agency to register new customers and manage their KYC
+            document verification, keeping all customer records organized in one place.</p>
+        </div>
+
+        <div class="project-card full" data-cat="all telephony crm web">
+          <div class="extra-panel" style="border:none; background:transparent; padding:0;">
+            <h3>Additional professional experience</h3>
+            <ul>
+              <li>500+ custom call routing APIs built to client spec</li>
+              <li>Cloud telephony dialer &amp; call center solutions</li>
+              <li>OBD CRM with IVR blast for domestic &amp; global campaigns</li>
+              <li>Blog, shopping &amp; church websites on WordPress</li>
+              <li>Hosting ops — cPanel, email config, domain &amp; subdomain management</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="line-label">Line 04 — Contact</div>
+      <div class="contact-panel reveal">
+        <div class="contact-left">
+          <h2>Let's build something reliable.</h2>
+          <p>Got a project idea or need someone to own the backend? I'm happy to talk it through.</p>
+        </div>
+        <div class="contact-list">
+          <div class="contact-row"><span class="k">Email</span><a
+              href="mailto:sharmachandan7706@gmail.com">sharmachandan7706@gmail.com</a></div>
+          <div class="contact-row"><span class="k">Phone</span><a href="tel:+917706912044">+91 7706912044</a></div>
+          <div class="contact-row"><span class="k">LinkedIn</span><a
+              href="https://www.linkedin.com/in/chandan-sharma-337968253" target="_blank"
+              rel="noopener">linkedin.com/in/chandan-sharma</a></div>
+          <div class="contact-row"><span class="k">GitHub</span><a href="https://github.com/programmerchandansharma"
+              target="_blank" rel="noopener">github.com/programmerchandansharma</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Chandan Sharma. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script>
+    (function () {
+      // ---------- mobile nav ----------
+      var burger = document.getElementById('burger');
+      var navLinks = document.getElementById('navLinks');
+      burger.addEventListener('click', function () {
+        var open = navLinks.classList.toggle('open');
+        burger.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', open);
+      });
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+          burger.classList.remove('open');
+          burger.setAttribute('aria-expanded', false);
+        });
+      });
+
+      // ---------- scroll reveal ----------
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.15 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      // ---------- project filter ----------
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      var cards = document.querySelectorAll('#projectGrid .project-card');
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var f = btn.getAttribute('data-filter');
+          cards.forEach(function (card) {
+            var cats = (card.getAttribute('data-cat') || '').split(' ');
+            card.style.display = (f === 'all' || cats.indexOf(f) !== -1) ? '' : 'none';
+          });
+        });
+      });
+
+      // ---------- 3D call-network globe ----------
+      var canvas = document.getElementById('globe-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+      camera.position.set(0, 0, 7.2);
+
+      var group = new THREE.Group();
+      scene.add(group);
+
+      // Fibonacci sphere node distribution
+      var NODE_COUNT = 90;
+      var RADIUS = 2.6;
+      var nodePositions = [];
+      (function () {
+        var offset = 2 / NODE_COUNT;
+        var increment = Math.PI * (3 - Math.sqrt(5));
+        for (var i = 0; i < NODE_COUNT; i++) {
+          var y = ((i * offset) - 1) + (offset / 2);
+          var r = Math.sqrt(1 - y * y);
+          var phi = i * increment;
+          var x = Math.cos(phi) * r;
+          var z = Math.sin(phi) * r;
+          nodePositions.push(new THREE.Vector3(x * RADIUS, y * RADIUS, z * RADIUS));
+        }
+      })();
+
+      // node points
+      var nodeGeo = new THREE.BufferGeometry().setFromPoints(nodePositions);
+      var nodeMat = new THREE.PointsMaterial({ color: 0x3157d5, size: 0.06, transparent: true, opacity: 0.9 });
+      var nodePoints = new THREE.Points(nodeGeo, nodeMat);
+      group.add(nodePoints);
+
+      // wireframe shell for structure
+      var shellGeo = new THREE.IcosahedronGeometry(RADIUS, 2);
+      var shellMat = new THREE.MeshBasicMaterial({ color: 0x3157d5, wireframe: true, transparent: true, opacity: 0.10 });
+      var shell = new THREE.Mesh(shellGeo, shellMat);
+      group.add(shell);
+
+      // connections: link each node to a few nearest neighbours
+      var connectionPairs = [];
+      var MAX_LINKS_PER_NODE = 2;
+      var MAX_DIST = 1.15;
+      for (var i = 0; i < nodePositions.length; i++) {
+        var dists = [];
+        for (var j = 0; j < nodePositions.length; j++) {
+          if (i === j) continue;
+          var d = nodePositions[i].distanceTo(nodePositions[j]);
+          if (d < MAX_DIST) dists.push([d, j]);
+        }
+        dists.sort(function (a, b) { return a[0] - b[0]; });
+        for (var k = 0; k < Math.min(MAX_LINKS_PER_NODE, dists.length); k++) {
+          var pair = [i, dists[k][1]];
+          var key = Math.min(pair[0], pair[1]) + '-' + Math.max(pair[0], pair[1]);
+          if (connectionPairs.indexOf(key) === -1) {
+            connectionPairs.push(key);
+          }
+        }
+      }
+      var linePts = [];
+      connectionPairs.forEach(function (key) {
+        var idx = key.split('-').map(Number);
+        linePts.push(nodePositions[idx[0]], nodePositions[idx[1]]);
+      });
+      var lineGeo = new THREE.BufferGeometry().setFromPoints(linePts);
+      var lineMat = new THREE.LineBasicMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.55 });
+      var lines = new THREE.LineSegments(lineGeo, lineMat);
+      group.add(lines);
+
+      // a handful of "active call" pulsing lines
+      var pulseLines = [];
+      var PULSE_COUNT = Math.min(10, connectionPairs.length);
+      for (var p = 0; p < PULSE_COUNT; p++) {
+        var key = connectionPairs[Math.floor(Math.random() * connectionPairs.length)];
+        var idx = key.split('-').map(Number);
+        var geo = new THREE.BufferGeometry().setFromPoints([nodePositions[idx[0]], nodePositions[idx[1]]]);
+        var mat = new THREE.LineBasicMaterial({ color: 0x0f9d7a, transparent: true, opacity: 0.9 });
+        var seg = new THREE.LineSegments(geo, mat);
+        seg.userData.phase = Math.random() * Math.PI * 2;
+        seg.userData.speed = 0.8 + Math.random() * 1.2;
+        pulseLines.push(seg);
+        group.add(seg);
+      }
+
+      function resize() {
+        var w = canvas.clientWidth, h = canvas.clientHeight;
+        if (w === 0 || h === 0) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      var mouseX = 0, mouseY = 0;
+      if (window.matchMedia('(pointer:fine)').matches) {
+        window.addEventListener('mousemove', function (e) {
+          mouseX = (e.clientX / window.innerWidth) - 0.5;
+          mouseY = (e.clientY / window.innerHeight) - 0.5;
+        });
+      }
+
+      var clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        var t = clock.getElapsedTime();
+
+        if (!reduceMotion) {
+          group.rotation.y = t * 0.12;
+          group.rotation.x = Math.sin(t * 0.15) * 0.08 + mouseY * 0.3;
+        } else {
+          group.rotation.y = 0.3;
+        }
+        group.rotation.y += mouseX * 0.05;
+
+        pulseLines.forEach(function (seg) {
+          var op = reduceMotion ? 0.5 : (0.15 + 0.75 * Math.abs(Math.sin(t * seg.userData.speed + seg.userData.phase)));
+          seg.material.opacity = op;
+        });
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+  </script>
 
 </body>
+
 </html>
